@@ -3,13 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Radium, { StyleRoot } from "radium";
 
 ReactDOM.render(
   <React.StrictMode>
-    <StyleRoot>
-      <App />
-    </StyleRoot>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
