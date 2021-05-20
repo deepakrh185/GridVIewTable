@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 import "./App.css";
+import Radium, { StyleRoot } from "radium";
 
 const App = () => {
   const [rowData, setRowData] = useState([]);
@@ -28,33 +29,45 @@ const App = () => {
       .join(", ");
     alert(`Selected cars : ${selectedDataStringPresentation}`);
   };
+  const style = {
+    // Adding media querry..
+    width: "500px",
+    height: "600px",
+
+    "@media (max-width: 550px)": {
+      height: "600px",
+      width: "350px",
+    },
+  };
   return (
-    <div className="app">
-      <div className="ag-theme-alpine" style={{ height: 590, width: 490 }}>
-        <button onClick={onButtonClick} className="app__button">
-          Get selected rows
-        </button>
-        <AgGridReact ref={gridRef} rowData={rowData} rowSelection="multiple">
-          <AgGridColumn
-            field="make"
-            sortable={true}
-            filter={true}
-            checkboxSelection={true}
-          ></AgGridColumn>
-          <AgGridColumn
-            field="model"
-            sortable={true}
-            filter={true}
-          ></AgGridColumn>
-          <AgGridColumn
-            field="price"
-            sortable={true}
-            filter={true}
-          ></AgGridColumn>
-        </AgGridReact>
+    <StyleRoot>
+      <div className="app">
+        <div className="ag-theme-alpine" style={style}>
+          <button onClick={onButtonClick} className="app__button">
+            Get selected rows
+          </button>
+          <AgGridReact ref={gridRef} rowData={rowData} rowSelection="multiple">
+            <AgGridColumn
+              field="make"
+              sortable={true}
+              filter={true}
+              checkboxSelection={true}
+            ></AgGridColumn>
+            <AgGridColumn
+              field="model"
+              sortable={true}
+              filter={true}
+            ></AgGridColumn>
+            <AgGridColumn
+              field="price"
+              sortable={true}
+              filter={true}
+            ></AgGridColumn>
+          </AgGridReact>
+        </div>
       </div>
-    </div>
+    </StyleRoot>
   );
 };
 
-export default App;
+export default Radium(App);
